@@ -27,6 +27,7 @@ exclude:
   - tts/
   - '*.db-shm'
   - '*.db-wal'
+  - '*.gz'
 dry_run: false
 ```
 
