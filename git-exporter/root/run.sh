@@ -119,6 +119,7 @@ function export_lovelace {
 
 function export_esphome {
     bashio::log.info 'Get ESPHome configs'
+    [ ! -d "${local_repository}/esphome" ] && mkdir "${local_repository}/esphome"
     rsync -archive --compress --delete --checksum --prune-empty-dirs -q \
          --exclude='.esphome*' --include='*/' --include='.gitignore' --include='*.yaml' --include='*.disabled' --exclude='secrets.yaml' --exclude='*' \
         /config/esphome ${local_repository}
