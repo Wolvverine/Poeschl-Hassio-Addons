@@ -1,3 +1,7 @@
+## 1.5.2 - 2022-09-28
+
+* 🔼 Updated rsync to `3.2.5-r0`
+
 ## 1.5.1 - 2022-09-03
 
 * 📝 Updated docs to new addon config
