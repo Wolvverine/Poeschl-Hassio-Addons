@@ -24,6 +24,8 @@ exclude:
   - deps/
   - known_devices.yaml
   - tts/
+secrets: ''
+allowed_secrets: ''
 dry_run: false
 ```
 
@@ -96,6 +98,12 @@ Following folders and files are excluded from the sync per default:
 * `secrets.yaml` (secrets are cleared)
 * `.cloud`
 * `.storage`
+
+### `secrets`
+
+
+### `allowed_secrets`
+
 
 ### `dry_run`
 
