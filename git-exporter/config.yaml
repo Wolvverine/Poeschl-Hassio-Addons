@@ -47,6 +47,8 @@ options:
     - '*.db-shm'
     - '*.db-wal'
     - '*.gz'
+  secrets: ''
+  allowed_secrets: ''
   dry_run: false
 schema:
   repository:
@@ -68,5 +70,9 @@ schema:
     check_for_ips: bool
     check_ssl: bool
   exclude:
+    - str
+  secrets:
+    - str
+  allowed_secrets:
     - str
   dry_run: bool
