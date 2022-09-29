@@ -135,6 +135,7 @@ function export_lovelace {
 
 function export_esphome {
     bashio::log.info 'Get ESPHome configs'
+    [ ! -d "${local_repository}/esphome" ] && mkdir "${local_repository}/esphome"
     rsync -archive --compress --delete --checksum --prune-empty-dirs -q \
          --exclude='.esphome*' --include='*/' --include='.gitignore' --include='*.yaml' --include='*.disabled' --exclude='secrets.yaml' --exclude='*' \
         /config/esphome ${local_repository}
@@ -171,7 +172,25 @@ function export_node-red {
     chmod 644 -R ${local_repository}/node-red
 }
 
+function disable_check_ssl {
+    bashio::log.info 'Disable SSL verification in git repositories'
+    git config --global http.sslVerify false
+}
+
+function enable_check_ssl {
+    bashio::log.info 'Enable SSL verification in git repositories'
+    git config --global http.sslVerify true
+}
+
 bashio::log.info 'Start git export'
+
+if [ "$(bashio::config 'check.check_ssl')" == 'false' ]; then
+    disable_check_ssl
+fi
+
+if [ "$(bashio::config 'check.check_ssl')" == 'true' ]; then
+    enable_check_ssl
+fi
 
 setup_git
 
@@ -196,7 +215,6 @@ fi
 if [ "$(bashio::config 'check.enabled')" == 'true' ]; then
     check_secrets
 fi
-
 
 if [ "$(bashio::config 'dry_run')" == 'true' ]; then
     git status

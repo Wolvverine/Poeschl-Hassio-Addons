@@ -17,6 +17,7 @@ checks:
   enabled: true
   check_for_secrets: true
   check_for_ips: true
+  check_ssl: true
 exclude:
   - '*.db'
   - '*.log'
@@ -24,6 +25,9 @@ exclude:
   - deps/
   - known_devices.yaml
   - tts/
+  - '*.db-shm'
+  - '*.db-wal'
+  - '*.gz'
 secrets: ''
 allowed_secrets: ''
 dry_run: false
@@ -87,6 +91,10 @@ Add your secret values to the check.
 ### `checks.check_for_ips`
 
 Add pattern for ip and mac addresses to the search.
+
+### `checks.check_ssl`
+
+Disable SSL verification in git repositories with self-signed certificates.
 
 
 ### `exclude`
