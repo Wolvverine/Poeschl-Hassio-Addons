@@ -2,7 +2,7 @@ name: rsync local
 version: 1.5.1
 slug: rsync-local
 description: Sync folders to a external usb drive with rsync.
-url: https://github.com/Poeschl/Hassio-Addons/tree/main/rsync-local
+url: https://github.com/Wolvverine/Poeschl-Hassio-Addons/tree/main/rsync-local
 arch:
   - armhf
   - armv7
