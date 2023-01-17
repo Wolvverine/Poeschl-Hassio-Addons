@@ -1,5 +1,5 @@
 name: Home Assistant Git Exporter
-version: 1.13.1
+version: 1.14.0
 slug: git-exporter
 description: Export all of your Home Assistant configuration to a git repository of your choice.
 url: https://github.com/Wolvverine/Hassio-Addons/tree/main/git-exporter
@@ -34,7 +34,6 @@ options:
     enabled: true
     check_for_secrets: true
     check_for_ips: true
-    check_ssl: true
   exclude:
     - '*.db'
     - '*.log*'
@@ -47,8 +46,8 @@ options:
     - '*.db-shm'
     - '*.db-wal'
     - '*.gz'
-  secrets: ''
-  allowed_secrets: ''
+  secrets: []
+  allowed_secrets: []
   dry_run: false
 schema:
   repository:
@@ -59,6 +58,7 @@ schema:
     pull_before_push: bool
     commit_message: str
     branch_name: str
+    ssl_verification: bool?
   export:
     lovelace: bool
     addons: bool
@@ -68,11 +68,10 @@ schema:
     enabled: bool
     check_for_secrets: bool
     check_for_ips: bool
-    check_ssl: bool
   exclude:
     - str
-  secrets:
+  secrets: 
     - str
-  allowed_secrets:
+  allowed_secrets: 
     - str
   dry_run: bool

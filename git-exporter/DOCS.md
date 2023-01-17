@@ -17,7 +17,6 @@ checks:
   enabled: true
   check_for_secrets: true
   check_for_ips: true
-  check_ssl: true
 exclude:
   - '*.db'
   - '*.log'
@@ -28,8 +27,8 @@ exclude:
   - '*.db-shm'
   - '*.db-wal'
   - '*.gz'
-secrets: ''
-allowed_secrets: ''
+secrets: []
+allowed_secrets: []
 dry_run: false
 ```
 
@@ -60,6 +59,10 @@ The commit message for the next commit.
 ### `repository.branch_name`
 
 The working branch for the repository.
+
+### `repository.ssl_verification` (Optional, default: true)
+
+Use this to disable the ssl verification. Can be used for self-signed certificates. __Use this only when you know what you are doing__
 
 
 ### `export.lovelace`
@@ -92,10 +95,6 @@ Add your secret values to the check.
 
 Add pattern for ip and mac addresses to the search.
 
-### `checks.check_ssl`
-
-Disable SSL verification in git repositories with self-signed certificates.
-
 
 ### `exclude`
 
@@ -109,8 +108,12 @@ Following folders and files are excluded from the sync per default:
 
 ### `secrets`
 
+Additional secrets which will be checked for.
+
 
 ### `allowed_secrets`
+
+Additional allowed secrets which will not make the secret check fail.
 
 
 ### `dry_run`

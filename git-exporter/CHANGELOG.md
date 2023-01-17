@@ -1,11 +1,11 @@
-## 1.13.1 - 2022-09-28
+## 1.14.0 - 2022-11-05
 
-* 🐛 Add option to disable SSL verification in git repositories with self-signed certificates (#305).
-* 🐛 Exclude SQLite temporary files
-* 🐛 Exclude compresed files (*.gz)
-
-* 🔼 Updated rsync to `3.2.5-r0`
-
+* ✨ Allow customising secret patterns (thanks @bjeanes #316)
+* ✨ Option to disable ssl verification for git (thanks @Wolvverine #350)
+* 🔨 Clean untracked files from working directory before syncing latest config (thanks @bjeanes #317)
+* 🔧 Exclude database temporary files on default (thanks @Wolvverine #351)
+* 🔼 Updated git to `2.36.3-r0`
+* 🔼 Updated rsync to `3.2.7-r0`
 
 ## 1.13.0 - 2022-07-27
 
@@ -180,4 +180,3 @@
 * ➕ ESPHome exports
 * ➕ Configurable Commit message
 * ➕ Configurable exports
-
