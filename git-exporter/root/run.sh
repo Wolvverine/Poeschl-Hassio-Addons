@@ -15,7 +15,7 @@ function setup_git {
     branch=$(bashio::config 'repository.branch_name')
     ssl_verify=$(bashio::config 'repository.ssl_verification')
 
-    if [[ "$password" != "ghp_*" ]]; then
+    if [[ "$password" != "ghp_*" ]]  && [[ "$password" != "github_pat_*" ]]; then
         password=$(python3 -c "import urllib.parse; print(urllib.parse.quote('${password}'))")
     fi
 
@@ -94,18 +94,20 @@ function check_secrets {
     prohibited_patterns=$(git config --get-all secrets.patterns)
     bashio::log.info "Prohibited patterns:\n${prohibited_patterns//\\n/\\\\n}"
 
-    custom_secrets=$(bashio::config 'secrets')
-    if [ ${#custom_secrets[@]} -gt 0 ]; then
+    readarray -t <<<"$(bashio::config 'secrets' | grep -v '^$')"
+    # shellcheck disable=SC2128
+    if [ -n "$MAPFILE" ] && [ ${#MAPFILE[@]} -gt 0 ]; then
         bashio::log.info 'Add custom secrets'
-        for secret in "${custom_secrets[@]}"; do
+        for secret in "${MAPFILE[@]}"; do
             git secrets --add "$secret"
         done
     fi
 
-    custom_allowed_secrets=$(bashio::config 'allowed_secrets')
-    if [ ${#custom_allowed_secrets[@]} -gt 0 ]; then
+    readarray -t <<<"$(bashio::config 'allowed_secrets' | grep -v '^$')"
+    # shellcheck disable=SC2128
+    if [ -n "$MAPFILE" ] && [ ${#MAPFILE[@]} -gt 0 ]; then
         bashio::log.info 'Add custom allowed secrets'
-        for allowed_secret in "${custom_allowed_secrets[@]}"; do
+        for allowed_secret in "${MAPFILE[@]}"; do
             git secrets --add -a "$allowed_secret"
         done
     fi
